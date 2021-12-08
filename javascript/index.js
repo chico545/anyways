@@ -904,6 +904,7 @@ var porkylip = [];
 var doubleShantay = false;
 var doubleSashay = false;
 var episodeChallenges = [];
+var episodeCount = 0;
 var returningQueen = false;
 var noDouble = false;
 var noReturn = false;
@@ -920,10 +921,12 @@ function newEpisode() {
     topQueens = [];
     bottomQueens = [];
     top2 = [];
+    episodeCount++;
     //queens remaining screen:
     var queensRemainingScreen = new Scene();
+        if (episodeCount == 1 || premiereCounter <= 2 && (s12Premiere || porkchopPremiere || s6Premiere) || team) {
     queensRemainingScreen.clean();
-    queensRemainingScreen.createHeader("Queens remaining...");
+    queensRemainingScreen.createHeader("Full cast");
     for (var i = 0; i < currentCast.length; i++) {
         queensRemainingScreen.createBold(currentCast[i].getName());
     }
@@ -938,6 +941,8 @@ function newEpisode() {
             currentCast[i]._lipsyncStat = randomNumber(0, 15);
             currentCast[i]._runwayStat = randomNumber(0, 15);
         }
+            else {
+        contestantProgress();
     }
     if (currentCast.length == totalCastSize && team == true)
         queensRemainingScreen.createButton("Proceed", "teamsScreen()");
@@ -975,6 +980,7 @@ function reSimulate() {
     firstCast = [];
     secondCast = [];
     premiereCounter = 0;
+    episodeCount = 0;
     totalCastSize = currentCast.length;
     //clean track records
     for (var i = 0; i < currentCast.length; i++) {
