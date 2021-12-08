@@ -1232,11 +1232,14 @@ function contestantProgress() {
     var winner = document.createElement("tr");
     var name = document.createElement("td");
     name.setAttribute("style", "background-color: #f5ebf5; font-weight: bold; height: 100px;");
-    var winnerQueen;
+    if (onFinale) {
+        var winnerQueen = void 0;
     if (!top4)
         winnerQueen = currentCast[0];
-    else
+        else if (onTop4Finale)
         winnerQueen = finalLS[0];
+        else
+            winnerQueen = currentCast[0];
     name.innerHTML = winnerQueen.getName();
     winner.appendChild(name);
     if (!custommode) {
