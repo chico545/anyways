@@ -714,7 +714,9 @@ function removeQueen() {
     }
     list.options[list.selectedIndex].remove();
 }
+var custommode = false;
 function customStartSimulation() {
+    custommode = true;
     if (customCast.length == 0) {
         window.alert("Your cast is empty!");
         return;
@@ -902,7 +904,6 @@ var porkylip = [];
 var doubleShantay = false;
 var doubleSashay = false;
 var episodeChallenges = [];
-var episodeCount = 0;
 var returningQueen = false;
 var noDouble = false;
 var noReturn = false;
@@ -920,17 +921,16 @@ function newEpisode() {
     bottomQueens = [];
     top2 = [];
     episodeCount++;
-        //queens remaining screen:
+    //queens remaining screen:
     var queensRemainingScreen = new Scene();
-    if (episodeCount == 1 || premiereCounter <= 2 && (s12Premiere || porkchopPremiere || s6Premiere) || team) {
-        queensRemainingScreen.clean();
+    queensRemainingScreen.clean();
     queensRemainingScreen.createHeader("Queens remaining...");
-        for (var i = 0; i < currentCast.length; i++) {
-            queensRemainingScreen.createBold(currentCast[i].getName());
-        }
+    for (var i = 0; i < currentCast.length; i++) {
+        queensRemainingScreen.createBold(currentCast[i].getName());
+       }
     }
     else {
-        contestantProgress();
+        contestantProgress();       
     }
     if (currentCast.length == totalCastSize && team == true)
         queensRemainingScreen.createButton("Proceed", "teamsScreen()");
@@ -968,7 +968,6 @@ function reSimulate() {
     firstCast = [];
     secondCast = [];
     premiereCounter = 0;
-    episodeCount = 0;
     totalCastSize = currentCast.length;
     //clean track records
     for (var i = 0; i < currentCast.length; i++) {
@@ -1205,6 +1204,12 @@ function contestantProgress() {
     th.innerHTML = "Queen";
     th.setAttribute("style", "background-color: #e9dfe9; font-weight: bold;");
     header.appendChild(th);
+    if (!custommode) {
+        var th_i = document.createElement("th");
+        th_i.innerHTML = "Photo";
+        th_i.setAttribute("style", "background-color: #e9dfe9; font-weight: bold;");
+        header.appendChild(th_i);
+    }
     for (var i = 0; i < episodeChallenges.length; i++) {
         var th_1 = document.createElement("th");
         th_1.innerHTML = episodeChallenges[i];
@@ -1218,14 +1223,19 @@ function contestantProgress() {
     var winner = document.createElement("tr");
     var name = document.createElement("td");
     name.setAttribute("style", "background-color: #f5ebf5; font-weight: bold; height: 100px;");
-    var winnerQueen;
+    var winnerQueen = void
     if (!top4)
         winnerQueen = currentCast[0];
     else
         winnerQueen = finalLS[0];
     name.innerHTML = winnerQueen.getName();
     winner.appendChild(name);
-        for (var i = 0; i < winnerQueen.trackRecord.length; i++) {
+    if (!custommode) {
+        var photow = document.createElement("td");
+        photow.setAttribute("style", "background: url("+ winnerQueen.getImg() +"); background-size: 106px 106px; background-position: center;");
+        winner.appendChild(photow);
+    }
+    for (var i = 0; i < winnerQueen.trackRecord.length+1; i++) {
         var placement = document.createElement("td");
         placement.innerHTML = winnerQueen.trackRecord[i];
         if (placement.innerHTML == "WIN") {
@@ -1319,7 +1329,12 @@ function contestantProgress() {
         name_1.setAttribute("style", "background-color: #f5ebf5; font-weight: bold;  height: 100px;");
         name_1.innerHTML = eliminatedCast[i].getName();
         contestant.appendChild(name_1);
-            for (var k = 0; k < currentCast[i].trackRecord.length; k++) {
+        if (!custommode) {
+            var photo = document.createElement("td");
+            photo.setAttribute("style", "background: url("+ eliminatedCast[i].getImg() +"); background-size: 106px 106px; background-position: center;");
+            contestant.appendChild(photo);
+        }
+        for (var k = 0; k < eliminatedCast[i].trackRecord.length+1; k++) {
             var placement = document.createElement("td");
             placement.innerHTML = eliminatedCast[i].trackRecord[k];
             if (placement.innerHTML == "WIN") {
