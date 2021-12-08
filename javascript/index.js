@@ -920,17 +920,24 @@ function newEpisode() {
     topQueens = [];
     bottomQueens = [];
     top2 = [];
-    episodeCount++;
     //queens remaining screen:
     var queensRemainingScreen = new Scene();
     queensRemainingScreen.clean();
     queensRemainingScreen.createHeader("Queens remaining...");
     for (var i = 0; i < currentCast.length; i++) {
         queensRemainingScreen.createBold(currentCast[i].getName());
-       }
     }
-    else {
-        contestantProgress();       
+     //chaos season
+    if (chaos == true) {
+        for (var i = 0; i < currentCast.length; i++) {
+            currentCast[i]._actingStat = randomNumber(0, 15);
+            currentCast[i]._comedyStat = randomNumber(0, 15);
+            currentCast[i]._danceStat = randomNumber(0, 15);
+            currentCast[i]._designStat = randomNumber(0, 15);
+            currentCast[i]._improvStat = randomNumber(0, 15);
+            currentCast[i]._lipsyncStat = randomNumber(0, 15);
+            currentCast[i]._runwayStat = randomNumber(0, 15);
+        }
     }
     if (currentCast.length == totalCastSize && team == true)
         queensRemainingScreen.createButton("Proceed", "teamsScreen()");
@@ -1223,7 +1230,7 @@ function contestantProgress() {
     var winner = document.createElement("tr");
     var name = document.createElement("td");
     name.setAttribute("style", "background-color: #f5ebf5; font-weight: bold; height: 100px;");
-    var winnerQueen = void
+    var winnerQueen;
     if (!top4)
         winnerQueen = currentCast[0];
     else
