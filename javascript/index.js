@@ -922,12 +922,12 @@ function newEpisode() {
     bottomQueens = [];
     top2 = [];
     episodeCount++;
+        //queens remaining screen:
     var queensRemainingScreen = new Scene();
     if (episodeCount == 1 || premiereCounter <= 2 && (s12Premiere || porkchopPremiere || s6Premiere) || team) {
         queensRemainingScreen.clean();
         queensRemainingScreen.createHeader("Full cast");
         for (var i = 0; i < currentCast.length; i++) {
-            queensRemainingScreen.createImage(currentCast[i].image);
             queensRemainingScreen.createBold(currentCast[i].getName());
         }
     }
