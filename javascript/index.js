@@ -1201,7 +1201,6 @@ function contestantProgress() {
     screen.clean();
     screen.createHeader("Contestant Progress");
     var main = document.querySelector("div#MainBlock");
-    var centering = document.createElement("center");
     var trackRecords = document.createElement("table");
     if (totalCastSize >= 12 && totalCastSize < 15)
         trackRecords.setAttribute("style", "font-size: 85%;");
