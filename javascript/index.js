@@ -938,6 +938,8 @@ function newEpisode() {
             currentCast[i]._lipsyncStat = randomNumber(0, 15);
             currentCast[i]._runwayStat = randomNumber(0, 15);
         }
+            else {
+        contestantProgress();
     }
     if (currentCast.length == totalCastSize && team == true)
         queensRemainingScreen.createButton("Proceed", "teamsScreen()");
