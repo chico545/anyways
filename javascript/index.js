@@ -714,9 +714,7 @@ function removeQueen() {
     }
     list.options[list.selectedIndex].remove();
 }
-var custommode = false;
 function customStartSimulation() {
-    custommode = true;
     if (customCast.length == 0) {
         window.alert("Your cast is empty!");
         return;
@@ -926,7 +924,7 @@ function newEpisode() {
     var queensRemainingScreen = new Scene();
     if (episodeCount == 1 || premiereCounter <= 2 && (s12Premiere || porkchopPremiere || s6Premiere) || team) {
         queensRemainingScreen.clean();
-        queensRemainingScreen.createHeader("Full cast");
+    queensRemainingScreen.createHeader("Queens remaining...");
         for (var i = 0; i < currentCast.length; i++) {
             queensRemainingScreen.createBold(currentCast[i].getName());
         }
@@ -1207,12 +1205,6 @@ function contestantProgress() {
     th.innerHTML = "Queen";
     th.setAttribute("style", "background-color: #e9dfe9; font-weight: bold;");
     header.appendChild(th);
-    if (!custommode) {
-        var th_i = document.createElement("th");
-        th_i.innerHTML = "Photo";
-        th_i.setAttribute("style", "background-color: #e9dfe9; font-weight: bold;");
-        header.appendChild(th_i);
-    }
     for (var i = 0; i < episodeChallenges.length; i++) {
         var th_1 = document.createElement("th");
         th_1.innerHTML = episodeChallenges[i];
@@ -1233,12 +1225,7 @@ function contestantProgress() {
         winnerQueen = finalLS[0];
     name.innerHTML = winnerQueen.getName();
     winner.appendChild(name);
-    if (!custommode) {
-        var photow = document.createElement("td");
-        photow.setAttribute("style", "background: url("+ winnerQueen.getImg() +"); background-size: 106px 106px; background-position: center;");
-        winner.appendChild(photow);
-    }
-    for (var i = 0; i < winnerQueen.trackRecord.length+1; i++) {
+        for (var i = 0; i < winnerQueen.trackRecord.length; i++) {
         var placement = document.createElement("td");
         placement.innerHTML = winnerQueen.trackRecord[i];
         if (placement.innerHTML == "WIN") {
@@ -1332,12 +1319,7 @@ function contestantProgress() {
         name_1.setAttribute("style", "background-color: #f5ebf5; font-weight: bold;  height: 100px;");
         name_1.innerHTML = eliminatedCast[i].getName();
         contestant.appendChild(name_1);
-        if (!custommode) {
-            var photo = document.createElement("td");
-            photo.setAttribute("style", "background: url("+ eliminatedCast[i].getImg() +"); background-size: 106px 106px; background-position: center;");
-            contestant.appendChild(photo);
-        }
-        for (var k = 0; k < eliminatedCast[i].trackRecord.length+1; k++) {
+            for (var k = 0; k < currentCast[i].trackRecord.length; k++) {
             var placement = document.createElement("td");
             placement.innerHTML = eliminatedCast[i].trackRecord[k];
             if (placement.innerHTML == "WIN") {
