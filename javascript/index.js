@@ -989,8 +989,17 @@ function newEpisode() {
     for (var i = 0; i < currentCast.length; i++) {
         queensRemainingScreen.createBold(currentCast[i].getName());
     }
-    else {
-        contestantProgress();
+         //chaos season
+    if (chaos == true) {
+        for (var i = 0; i < currentCast.length; i++) {
+            currentCast[i]._actingStat = randomNumber(0, 15);
+            currentCast[i]._comedyStat = randomNumber(0, 15);
+            currentCast[i]._danceStat = randomNumber(0, 15);
+            currentCast[i]._designStat = randomNumber(0, 15);
+            currentCast[i]._improvStat = randomNumber(0, 15);
+            currentCast[i]._lipsyncStat = randomNumber(0, 15);
+            currentCast[i]._runwayStat = randomNumber(0, 15);
+        }
     }
     if (currentCast.length == totalCastSize && team == true)
         queensRemainingScreen.createButton("Proceed", "teamsScreen()");
